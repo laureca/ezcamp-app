@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import {Image, Text, TextInput, TouchableOpacity, View} from 'react-native';
 
 import logo from './src/assets/images/logo.png';
@@ -6,7 +6,10 @@ import logo from './src/assets/images/logo.png';
 export default () => {
   const [username, setUsername] = useState('');
 
-  console.log(username);
+  const onSubmit = useCallback(() => {
+    // TODO try to authenticate
+    // TODO 
+  }, []);
 
   return (
     <View
@@ -35,21 +38,23 @@ export default () => {
           paddingHorizontal:15,
         }}
       />
-      <TouchableOpacity style={{
-        marginTop: 10,
-        height: 45,
-        alignSelf: 'stretch',
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: '#F35009',
-        borderRadius: 6,
-      }}>
-        <Text style={{
-          color: '#E4E4E4',
-          fontWeight: 'bold',
+      <TouchableOpacity
+        onPress={onSubmit} 
+        style={{
+          marginTop: 10,
+          height: 45,
+          alignSelf: 'stretch',
+          alignItems: 'center',
+          justifyContent: 'center',
+          backgroundColor: '#F35009',
+          borderRadius: 6,
         }}>
+          <Text style={{
+            color: '#E4E4E4',
+            fontWeight: 'bold',
+          }}>
           ENTRAR
-        </Text>
+          </Text>
       </TouchableOpacity>
       <Text 
         style={{
