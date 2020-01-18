@@ -1,11 +1,16 @@
-import React, {useCallback, useState, useEffect} from 'react';
-import {Image, TouchableOpacity, View} from 'react-native';
+import React, {useCallback,  useEffect, useMemo, useState} from 'react';
+import {Image, Text, TouchableOpacity, View} from 'react-native';
 
 import logo from '../assets/images/logo.png';
+import like from '../assets/images/like.png';
+import dislike from '../assets/images/dislike.png';
+
 import api from '../store/api';
 
 export default ({navigation: {getParam, navigate}}) => {
     const [users, setUsers] = useState([]);
+
+    const {avatar: uri, bio, name} = useMemo(() => users[0] || {}, [users]);
 
     const id = getParam('id');
 
@@ -48,8 +53,79 @@ export default ({navigation: {getParam, navigate}}) => {
                     height: 300,
                     width: 300,
                 }}
-                source={null}
+                source={{uri}}
                 />
+                <View 
+                    style={{
+                        paddingHorizontal: 20,
+                        paddingVertical: 15,
+                        borderRadius: 8,
+                    }}>
+                        <Text
+                            style={{
+                                fontSize: 16, 
+                                fontWeight: 'bold',
+                                color: '#333',
+                            }}>
+                                {name}
+                        </Text>
+                        <Text 
+                            style={{
+                                fontSize: 14,
+                                color: '#999',
+                                marginTop: 5,
+                                lineHeight: 8,
+                            }}
+                            numberOfLines={3}>
+                                {bio}
+                        </Text>
+                </View>
             </View>
+
+            <View
+        style={{
+          flexDirection: 'row',
+        }}>
+        <TouchableOpacity
+          style={{
+            width: 50,
+            height: 50,
+            borderRadius: 25,
+            backgroundColor: '#FFF',
+            justifyContent: 'center',
+            alignItems: 'center',
+            marginHorizontal: 20,
+            elevation: 2,
+            shadowColor: '#000',
+            shadowOpacity: 0.05,
+            shadowRadius: 2,
+            shadowOffset: {
+              width: 0,
+              height: 2,
+            },
+          }}>
+          <Image source={dislike} />
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={{
+            width: 50,
+            height: 50,
+            borderRadius: 25,
+            backgroundColor: '#FFF',
+            justifyContent: 'center',
+            alignItems: 'center',
+            marginHorizontal: 20,
+            elevation: 2,
+            shadowColor: '#000',
+            shadowOpacity: 0.05,
+            shadowRadius: 2,
+            shadowOffset: {
+              width: 0,
+              height: 2,
+            },
+          }}>
+          <Image source={like} />
+        </TouchableOpacity>
+      </View>
         </View>)};
 
