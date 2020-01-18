@@ -14,6 +14,24 @@ export default ({navigation: {getParam, navigate}}) => {
 
     const id = getParam('id');
 
+    const onEvaluate = useCallback(
+        async evaluation => {
+          const [{_id}, ...rest] = users;
+    
+          await api.post(`/devs/${_id}/${evaluation}`, null, {
+            headers: {
+              user: id,
+            },
+          });
+    
+          setUsers(rest);
+        },
+        [id, users],
+      );
+    
+      const onDislike = useCallback(() => onEvaluate('dislikes'), [onEvaluate]);
+      const onLike = useCallback(() => onEvaluate('likes'), [onEvaluate]);
+
     const onLogout = useCallback(() => navigate('login'), [navigate]);
 
     const loadUsers = useCallback(async () => {
@@ -83,49 +101,51 @@ export default ({navigation: {getParam, navigate}}) => {
             </View>
 
             <View
-        style={{
-          flexDirection: 'row',
-        }}>
-        <TouchableOpacity
-          style={{
-            width: 50,
-            height: 50,
-            borderRadius: 25,
-            backgroundColor: '#FFF',
-            justifyContent: 'center',
-            alignItems: 'center',
-            marginHorizontal: 20,
-            elevation: 2,
-            shadowColor: '#000',
-            shadowOpacity: 0.05,
-            shadowRadius: 2,
-            shadowOffset: {
-              width: 0,
-              height: 2,
-            },
-          }}>
-          <Image source={dislike} />
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={{
-            width: 50,
-            height: 50,
-            borderRadius: 25,
-            backgroundColor: '#FFF',
-            justifyContent: 'center',
-            alignItems: 'center',
-            marginHorizontal: 20,
-            elevation: 2,
-            shadowColor: '#000',
-            shadowOpacity: 0.05,
-            shadowRadius: 2,
-            shadowOffset: {
-              width: 0,
-              height: 2,
-            },
-          }}>
-          <Image source={like} />
-        </TouchableOpacity>
-      </View>
-        </View>)};
+            style={{
+            flexDirection: 'row',
+            }}>
+            <TouchableOpacity
+            onPress={dislike}
+            style={{
+                width: 50,
+                height: 50,
+                borderRadius: 25,
+                backgroundColor: '#FFF',
+                justifyContent: 'center',
+                alignItems: 'center',
+                marginHorizontal: 20,
+                elevation: 2,
+                shadowColor: '#000',
+                shadowOpacity: 0.05,
+                shadowRadius: 2,
+                shadowOffset: {
+                width: 0,
+                height: 2,
+                },
+            }}>
+            <Image source={dislike} />
+            </TouchableOpacity>
+            <TouchableOpacity
+            onPress={like}
+            style={{
+                width: 50,
+                height: 50,
+                borderRadius: 25,
+                backgroundColor: '#FFF',
+                justifyContent: 'center',
+                alignItems: 'center',
+                marginHorizontal: 20,
+                elevation: 2,
+                shadowColor: '#000',
+                shadowOpacity: 0.05,
+                shadowRadius: 2,
+                shadowOffset: {
+                width: 0,
+                height: 2,
+                },
+            }}>
+            <Image source={like} />
+            </TouchableOpacity>
+        </View>
+</View>)};
 
