@@ -1,5 +1,5 @@
 import React from 'react';
-import {Image,TextInput, View} from 'react-native';
+import {Image, Text, TextInput, TouchableOpacity, View} from 'react-native';
 
 import logo from './src/assets/images/logo.png';
 
@@ -10,6 +10,8 @@ export default () => (
       backgroundColor: '#E4E4E4',
       justifyContent: 'center',
       alignItems: 'center',
+      paddingHorizontal: 15,
+      
     }}>
     <Image source={logo}/>
     <TextInput 
@@ -23,9 +25,23 @@ export default () => (
         borderColor: '#ddd',
         borderRadius: 4,
         alignSelf: 'stretch',
-        marginHorizontal: 15,
         paddingHorizontal:15,
       }}
     />
+
+    <TouchableOpacity style={{
+      marginTop: 10,
+      height: 45,
+      alignSelf: 'stretch',
+      alignItems: 'center',
+      justifyContent: 'center',
+      backgroundColor: '#F35009',
+      borderRadius: 6,
+    }}>
+      <Text style={{
+        color: '#E4E4E4',
+        fontWeight: 'bold',
+      }}>ENTRAR</Text>
+    </TouchableOpacity>
   </View>
 );
